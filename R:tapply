@@ -1,0 +1,26 @@
+library(tidyverse)
+# Tworzenie tabeli w R
+cars <- data.frame(
+  producent = c(
+    "Toyota", "Toyota", "Toyota", "Toyota",
+    "Ford",   "Ford",   "Ford",   "Ford"
+  ),
+  model = c(
+    "Corolla", "Camry", "Supra", "GT86",
+    "Focus", "Fiesta", "Mustang", "Bronco"
+  ),
+  ilosc_cylindrow = c(
+    4, 4, 6, 6,   # Toyota: 4 cyl -> 2 auta, 6 cyl -> 2 auta
+    4, 4, 6, 6    # Ford:   4 cyl -> 2 auta, 6 cyl -> 2 auta
+  ),
+  konie_mechaniczne = c(
+    132, 140, 335, 200,
+    120, 100, 450, 275
+  ),
+  stringsAsFactors = FALSE
+)
+
+
+tapply(cars$konie_mechaniczne,cars[-c(2,4)],mean) |>
+  as.data.frame() |>
+  rownames_to_column("Prod")
